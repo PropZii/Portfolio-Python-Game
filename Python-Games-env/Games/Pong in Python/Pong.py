@@ -10,13 +10,13 @@ GREEN = (0, 255, 0)
 BLACK = (0, 0, 0)
 
 # globals
-WIDTH = 900
-HEIGHT = 700
-PAD_HEIGHT = 80
-PAD_WIDTH = 6
-BALL_RADIUS = 20
-HALF_PAD_WIDTH = PAD_WIDTH / 2
+WIDTH = 800
+HEIGHT = 600
+PAD_HEIGHT = 100
+PAD_WIDTH = 20
 HALF_PAD_HEIGHT = PAD_HEIGHT / 2
+HALF_PAD_WIDTH = PAD_WIDTH / 2
+BALL_RADIUS = 20
 ball_pos = [0, 0]
 ball_vel = [0, 0]
 paddle1_vel = 0
@@ -28,11 +28,25 @@ player2_score = 0
 WINDOWS = pygame.display.set_mode((WIDTH, HEIGHT), 0, 32)
 pygame.display.set_caption("Pong")
 
-# game loop
+
+class Paddle:
+
+    def __init__(self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+
+    def draw(self, windows):
+        pygame.draw.rect(windows, WHITE,
+                         (self.x, self.y, self.width, self.height))
 
 
-def draw(windows):
-    windows.fill(WHITE)
+def draw(windows, paddles):
+    windows.fill(BLACK)
+
+    for paddle in paddles:
+        paddle.draw(windows)
     pygame.display.update()
 
 
@@ -40,9 +54,15 @@ def main():
     run = True
     clock = fps
 
+    left_paddle = Paddle(10, HEIGHT//2 - HALF_PAD_HEIGHT,
+                         PAD_WIDTH, PAD_HEIGHT)
+
+    right_paddle = Paddle(WIDTH - 10 - PAD_WIDTH, HEIGHT//2 - HALF_PAD_HEIGHT,
+                          PAD_WIDTH, PAD_HEIGHT)
+
     while run:
         clock.tick(FPS)
-        draw(WINDOWS)
+        draw(WINDOWS, [left_paddle, right_paddle])
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
