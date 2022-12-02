@@ -119,7 +119,6 @@ def handle_collision(ball, left_paddle, right_paddle):
         if ball.y >= left_paddle.y and ball.y < + left_paddle.y + left_paddle.height:
             if ball.x - ball.radius <= left_paddle.x + left_paddle.width:
                 ball.x_vel *= -1
-                FPS += 5
 
                 middle_y = left_paddle.y + left_paddle.height / 2
                 diff_in_y = middle_y - ball.y
@@ -131,7 +130,6 @@ def handle_collision(ball, left_paddle, right_paddle):
         if ball.y >= right_paddle.y and ball.y < + right_paddle.y + right_paddle.height:
             if ball.x + + ball.radius >= right_paddle.x:
                 ball.x_vel *= -1
-                FPS += 5
 
                 middle_y = right_paddle.y + right_paddle.height / 2
                 diff_in_y = middle_y - ball.y
