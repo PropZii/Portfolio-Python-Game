@@ -54,6 +54,8 @@ class Ball:
         self.radius = radius
         self.x_vel = self.MAX_VEL
         self.y_vel = 0
+
+    def draw(self, windows):
         pygame.draw.circle(windows, RED, (self.x, self.y), self.radius)
 
     def move(self):
