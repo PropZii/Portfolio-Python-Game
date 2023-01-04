@@ -1,6 +1,8 @@
 from random import choice
 from unidecode import unidecode
 
+my_file_path = r"Python-Games-env/Games/Jeu du Pendu/motsPendu.txt"
+
 nb_erreur = 0
 
 
@@ -138,11 +140,12 @@ def word():
         print("Mot aléatoire = 1 ou Mot défini = 2")
         try:
             choix = (int(input("1: \ 2: ")))
+
         except ValueError:
             continue
         if choix == 1:
             print("Vous avez choisi le mode : {}".format(ma))
-            with open("mots_pendu.txt", "r", encoding='utf8') as f:
+            with open(my_file_path, "r", encoding='utf8') as f:
                 contenu = f.readlines()
             return unidecode(choice(contenu)).upper().replace('\n', '')
         if choix == 2:
@@ -201,3 +204,4 @@ if '_' not in affichage:
     print("Bien joué, vous avez gagné")
 else:
     print("Vous avez perdu")
+    print("Le mot était:", mot_à_deviner)
